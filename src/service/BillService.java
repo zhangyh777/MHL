@@ -47,6 +47,11 @@ public class BillService {
         String sql = "select * from bill";
         return billDAO.queryMany(sql,Bill.class);
     }
+
+    /**
+     * 账单显示菜名和单价
+     * @return
+     */
     public List<MultiTable> getBillExtra(){
         String sql = "select bill.*,name,price from bill,menu where bill.menuId=menu.id";
         return multiTableDAO.queryMany(sql,MultiTable.class);
