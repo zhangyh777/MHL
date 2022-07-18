@@ -63,6 +63,9 @@ public class BillService {
      * @return
      */
     public boolean payBill(int tableId,String payMethod){
+        /*
+            可以用事务优化
+         */
         //更新bill表
         String sql1 = "update bill set state = ? where diningTableId = ? and state = '未结账'";
         int rows = billDAO.update(sql1,payMethod,tableId);
