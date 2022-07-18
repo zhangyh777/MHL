@@ -2,7 +2,9 @@ package service;
 
 import dao.BillDAO;
 import dao.MenuDAO;
+import dao.MultiTableDAO;
 import domain.Bill;
+import domain.MultiTable;
 
 
 import java.util.List;
@@ -14,6 +16,7 @@ public class BillService {
     MenuService mS = new MenuService();
     DiningTableService dtS = new DiningTableService();
     BillDAO billDAO = new BillDAO();
+    MultiTableDAO multiTableDAO = new MultiTableDAO();
     /**
      * 点餐功能
      * 1.生成账单
@@ -24,9 +27,9 @@ public class BillService {
      */
     public boolean orderMenu(int menuId,int nums,int diningTableId){
         String billId = UUID.randomUUID().toString();
-        String sql = "INSERT INTO bill VALUES (null,?,?,?,?,?,?,?,now(),'未结账')";
+        String sql = "INSERT INTO bill VALUES (null,?,?,?,?,?,now(),'未结账')";
         //1.生成账单
-        int rows = menuDAO.update(sql,billId,menuId,mS.getMenuById(menuId).getName(),mS.getMenuById(menuId).getPrice(),nums,mS.getMenuById(menuId).getPrice()*nums,diningTableId);
+        int rows = menuDAO.update(sql,billId,menuId,nums,mS.getMenuById(menuId).getPrice()*nums,diningTableId);
         if (rows<=0){
             return false;
         }
@@ -43,6 +46,10 @@ public class BillService {
     public List<Bill> getBill(){
         String sql = "select * from bill";
         return billDAO.queryMany(sql,Bill.class);
+    }
+    public List<MultiTable> getBillExtra(){
+        String sql = "select bill.*,name,price from bill,menu where bill.menuId=menu.id";
+        return multiTableDAO.queryMany(sql,MultiTable.class);
     }
 
     /**

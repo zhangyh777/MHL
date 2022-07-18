@@ -18,6 +18,7 @@ public class MHLView {
     private DiningTableService diningTableService = new DiningTableService();
     private MenuService menuService = new MenuService();
     private BillService billService = new BillService();
+
     /**
      * 显示所有餐桌的状态
      */
@@ -125,11 +126,10 @@ public class MHLView {
      * @return
      */
     public void getBill() {
-
-        System.out.println("\n编号\t\t菜品号\t\t菜品名\t\t价格\t\t菜品量\t\t金额\t\t桌号\t\t日期\t\t\t\t\t\t\t状态");
-        for (Bill b: billService.getBill()
+        System.out.println("\n编号\t\t菜品号\t\t菜品名\t\t单价\t\t菜品量\t\t金额\t\t桌号\t\t日期\t\t\t\t\t\t\t状态");
+        for (MultiTable m: billService.getBillExtra()
              ) {
-            System.out.println(b);
+            System.out.println(m);
         }
         System.out.println("===============显示完毕===============");
     }

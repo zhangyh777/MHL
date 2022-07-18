@@ -2,43 +2,38 @@ package domain;
 
 import java.util.Date;
 
-public class Bill {
-    /*
-    id int primary key auto_increment, #自增主键
-	billId varchar(50) not null default '',#账单号可以按照自己规则生成 UUID
-	menuId int not null default 0,#菜品的编号, 也可以使用外键
-	nums SMALLINT not null default 0,#份数
-	money double not null default 0, #金额
-	diningTableId int not null default 0, #餐桌
-	billDate datetime not null ,#订单日期
-	state varchar(50) not null default '' # 状态 '未结账' , '已经结账',
-     */
+/**
+ * 多表查询
+ * Bill+Menu
+ */
+public class MultiTable {
+    //Bill表的字段
     private Integer id;
     private String billId;
     private Integer menuId;
-
-
-
     private Integer nums;
     private Double money;
     private Integer diningTableId;
     private Date billDate;
     private String state;
+    //Menu表的部分字段
+    private String name;
+    private Double price;
 
-
-    public Bill() {
+    public MultiTable() {
     }
 
-    public Bill(Integer id, String billId, Integer menuId, Integer nums, Double money, Integer diningTableId, Date billDate, String state) {
+    public MultiTable(Integer id, String billId, Integer menuId, Integer nums, Double money, Integer diningTableId, Date billDate, String state, String name, Double price) {
         this.id = id;
         this.billId = billId;
         this.menuId = menuId;
-
         this.nums = nums;
         this.money = money;
         this.diningTableId = diningTableId;
         this.billDate = billDate;
         this.state = state;
+        this.name = name;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -65,6 +60,21 @@ public class Bill {
         this.menuId = menuId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public Integer getNums() {
         return nums;
@@ -110,10 +120,13 @@ public class Bill {
     public String toString() {
         return id +
                 "\t\t" + menuId +
-                "\t\t\t" + nums +
+                "\t\t\t" + name +
+                "\t\t" + price +
+                "\t" + nums +
                 "\t\t\t" + money +
                 "\t" + diningTableId +
                 "\t\t" + billDate +
                 "\t\t" + state;
     }
+
 }
