@@ -48,6 +48,13 @@ public class DiningTableService {
         int rows = diningTableDAO.update(sql,state,id);
         return rows > 0;
     }
+
+    /**
+     * 重置餐桌的状态
+     * state="空"    orderName=''    orderTel=''
+     * @param id
+     * @return
+     */
     public boolean resetDiningTableState(int id){
         String sql = "update diningtable set state = ?,orderName = '',orderTel = '' where id = ?";
         int rows = diningTableDAO.update(sql,"空",id);

@@ -17,6 +17,12 @@ public class MenuService {
         String sql = "SELECT * FROM menu";
         return menuDAO.queryMany(sql, Menu.class);
     }
+
+    /**
+     * 验证菜品是否存在
+     * @param id
+     * @return
+     */
     public Menu getMenuById(int id){
         return menuDAO.querySingle("select * from menu where id = ?",Menu.class,id);
     }

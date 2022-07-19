@@ -20,7 +20,7 @@ public class MHLView {
     private BillService billService = new BillService();
 
     /**
-     * 显示所有餐桌的状态
+     * 1.显示所有餐桌的状态
      */
     public void listTableState(){
         List<DiningTable> list = diningTableService.getAllTableState();
@@ -33,7 +33,7 @@ public class MHLView {
     }
 
     /**
-     * 预定餐桌
+     * 2.预定餐桌
      */
     public void orderTable(){
         System.out.println("===============预定餐桌===============");
@@ -77,7 +77,18 @@ public class MHLView {
     }
 
     /**
-     * 点餐功能
+     * 3.显示菜单
+     */
+    public void getMenu(){
+        System.out.println("id\t"+"name\t"+"type\t"+"price");
+        for (Menu m: menuService.getMenu()
+        ) {
+            System.out.println(m);
+        }
+    }
+
+    /**
+     * 4.点餐功能
      */
     public void orderMenu(){
         System.out.println("======点餐服务======");
@@ -111,8 +122,9 @@ public class MHLView {
             System.out.println("菜品不存在");
             return;
         }
+        //点菜
         boolean b = billService.orderMenu(menuId, nums, diningTableId);
-        if (b==true){
+        if (b){
             System.out.println("点餐成功");
         }else {
             System.out.println("点餐失败");
@@ -122,7 +134,7 @@ public class MHLView {
     }
 
     /**
-     * 显示账单信息
+     * 5.显示账单信息
      * @return
      */
     public void getBill() {
@@ -135,7 +147,7 @@ public class MHLView {
     }
 
     /**
-     * 结账
+     * 6.结账
      */
     public void payBill(){
         System.out.println("======结账服务======");
@@ -216,11 +228,7 @@ public class MHLView {
                                     orderTable();
                                     break;
                                 case "3":
-                                    System.out.println("id\t"+"name\t"+"type\t"+"price");
-                                    for (Menu m: menuService.getMenu()
-                                         ) {
-                                        System.out.println(m);
-                                    }
+                                    getMenu();
                                     break;
                                 case "4":
                                     orderMenu();
